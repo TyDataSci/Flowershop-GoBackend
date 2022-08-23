@@ -14,6 +14,10 @@ import (
 var users = []*models.User{}
 var currentUser = &models.User{ID: "0", Username: "Admin", Password: "Password"}
 
+func GetUsers() []*models.User {
+	return users
+}
+
 func RemoveUser(slice []*models.User, index int) []*models.User {
 	modified := make([]*models.User, 0)
 	modified = append(modified, slice[:index]...)

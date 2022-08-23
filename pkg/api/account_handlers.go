@@ -12,6 +12,10 @@ import (
 var accounts = []*models.Account{}
 var accountMap = make(map[string]*models.Account)
 
+func GetAccounts() []*models.Account {
+	return accounts
+}
+
 func RemoveAccount(slice []*models.Account, index int) []*models.Account {
 	modified := make([]*models.Account, 0)
 	modified = append(modified, slice[:index]...)

@@ -13,6 +13,10 @@ import (
 
 var flowers = []*models.Item{}
 
+func GetFlowers() []*models.Item {
+	return flowers
+}
+
 func RemoveItem(slice []*models.Item, index int) []*models.Item {
 	modified := make([]*models.Item, 0)
 	modified = append(modified, slice[:index]...)
