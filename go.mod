@@ -1,4 +1,4 @@
-module main
+module Flowershop-GoBackend
 
 go 1.17
 
