@@ -92,27 +92,32 @@ func RemoveOrder(slice []*Order, index int) []*Order {
 
 func getFlowers(writer http.ResponseWriter, router *http.Request) {
 	writer.Header().Set("Content-Type", "application/json")
+	writer.Header().Set("Access-Control-Allow-Origin", "*")
 	json.NewEncoder(writer).Encode(flowers)
 }
 
 func getUsers(writer http.ResponseWriter, router *http.Request) {
 	writer.Header().Set("Content-Type", "application/json")
+	writer.Header().Set("Access-Control-Allow-Origin", "*")
 	json.NewEncoder(writer).Encode(users)
 }
 
 func getAccounts(writer http.ResponseWriter, router *http.Request) {
 	writer.Header().Set("Content-Type", "application/json")
+	writer.Header().Set("Access-Control-Allow-Origin", "*")
 	json.NewEncoder(writer).Encode(accounts)
 }
 
 func getOrders(writer http.ResponseWriter, router *http.Request) {
 	orders := userOrderMap[currentUser.ID]
 	writer.Header().Set("Content-Type", "application/json")
+	writer.Header().Set("Access-Control-Allow-Origin", "*")
 	json.NewEncoder(writer).Encode(orders)
 }
 
 func getFlower(writer http.ResponseWriter, router *http.Request) {
 	writer.Header().Set("Content-Type", "application/json")
+	writer.Header().Set("Access-Control-Allow-Origin", "*")
 	params := mux.Vars(router)
 	for _, item := range flowers {
 		if item.ID == params["id"] {
@@ -124,9 +129,10 @@ func getFlower(writer http.ResponseWriter, router *http.Request) {
 
 func getUser(writer http.ResponseWriter, router *http.Request) {
 	writer.Header().Set("Content-Type", "application/json")
+	writer.Header().Set("Access-Control-Allow-Origin", "*")
 	params := mux.Vars(router)
 	for _, user := range users {
-		if user.ID == params["id"] {
+		if user.Username == params["username"] {
 			json.NewEncoder(writer).Encode(user)
 			currentUser = user
 			return
@@ -136,6 +142,7 @@ func getUser(writer http.ResponseWriter, router *http.Request) {
 
 func getAccount(writer http.ResponseWriter, router *http.Request) {
 	writer.Header().Set("Content-Type", "application/json")
+	writer.Header().Set("Access-Control-Allow-Origin", "*")
 	params := mux.Vars(router)
 	//accountID := params["id"]
 	for _, account := range accounts {
@@ -157,6 +164,7 @@ func getAccount(writer http.ResponseWriter, router *http.Request) {
 func getOrder(writer http.ResponseWriter, router *http.Request) {
 	orders := userOrderMap[currentUser.ID]
 	writer.Header().Set("Content-Type", "application/json")
+	writer.Header().Set("Access-Control-Allow-Origin", "*")
 	params := mux.Vars(router)
 	for _, order := range orders {
 		if order.ID == params["id"] {
@@ -168,6 +176,7 @@ func getOrder(writer http.ResponseWriter, router *http.Request) {
 
 func createFlower(writer http.ResponseWriter, router *http.Request) {
 	writer.Header().Set("Content-Type", "application/json")
+	writer.Header().Set("Access-Control-Allow-Origin", "*")
 	var flower *Item
 	_ = json.NewDecoder(router.Body).Decode(&flower)
 	flower.ID = strconv.Itoa(rand.Intn(100000))
@@ -177,6 +186,7 @@ func createFlower(writer http.ResponseWriter, router *http.Request) {
 
 func createUser(writer http.ResponseWriter, router *http.Request) {
 	writer.Header().Set("Content-Type", "application/json")
+	writer.Header().Set("Access-Control-Allow-Origin", "*")
 	var user *User
 	_ = json.NewDecoder(router.Body).Decode(&user)
 	user.ID = strconv.Itoa(rand.Intn(100000))
@@ -186,6 +196,7 @@ func createUser(writer http.ResponseWriter, router *http.Request) {
 
 func createAccount(writer http.ResponseWriter, router *http.Request) {
 	writer.Header().Set("Content-Type", "application/json")
+	writer.Header().Set("Access-Control-Allow-Origin", "*")
 	var account *Account
 	_ = json.NewDecoder(router.Body).Decode(&account)
 	account.ID = currentUser.ID
@@ -203,6 +214,7 @@ func createAccount(writer http.ResponseWriter, router *http.Request) {
 func createOrder(writer http.ResponseWriter, router *http.Request) {
 	orders := userOrderMap[currentUser.ID]
 	writer.Header().Set("Content-Type", "application/json")
+	writer.Header().Set("Access-Control-Allow-Origin", "*")
 	var order *Order
 	_ = json.NewDecoder(router.Body).Decode(&order)
 	order.ID = strconv.Itoa(rand.Intn(100000))
@@ -225,6 +237,7 @@ func createOrder(writer http.ResponseWriter, router *http.Request) {
 func updateFlower(writer http.ResponseWriter, router *http.Request) {
 	//set json content type
 	writer.Header().Set("Content-Type", "application/json")
+	writer.Header().Set("Access-Control-Allow-Origin", "*")
 	//json params
 	params := mux.Vars(router)
 	//loop thru movies,range
@@ -244,6 +257,7 @@ func updateFlower(writer http.ResponseWriter, router *http.Request) {
 func updateUser(writer http.ResponseWriter, router *http.Request) {
 	//Remove the previous user and append the modified user with changes
 	writer.Header().Set("Content-Type", "application/json")
+	writer.Header().Set("Access-Control-Allow-Origin", "*")
 	params := mux.Vars(router)
 	for index, user := range users {
 		if user.ID == params["id"] {
@@ -260,6 +274,7 @@ func updateUser(writer http.ResponseWriter, router *http.Request) {
 
 func updateAccount(writer http.ResponseWriter, router *http.Request) {
 	writer.Header().Set("Content-Type", "application/json")
+	writer.Header().Set("Access-Control-Allow-Origin", "*")
 	params := mux.Vars(router)
 	for index, account := range accounts {
 		if account.ID == params["id"] {
@@ -277,6 +292,7 @@ func updateAccount(writer http.ResponseWriter, router *http.Request) {
 func updateOrder(writer http.ResponseWriter, router *http.Request) {
 	orders := userOrderMap[currentUser.ID]
 	writer.Header().Set("Content-Type", "application/json")
+	writer.Header().Set("Access-Control-Allow-Origin", "*")
 	params := mux.Vars(router)
 	for index, order := range orders {
 		if order.ID == params["id"] {
@@ -303,6 +319,7 @@ func updateOrder(writer http.ResponseWriter, router *http.Request) {
 
 func deleteFlower(writer http.ResponseWriter, router *http.Request) {
 	writer.Header().Set("Content-Type", "application/json")
+	writer.Header().Set("Access-Control-Allow-Origin", "*")
 	params := mux.Vars(router)
 	for index, item := range flowers {
 		if item.ID == params["id"] {
@@ -316,6 +333,7 @@ func deleteFlower(writer http.ResponseWriter, router *http.Request) {
 
 func deleteUser(writer http.ResponseWriter, router *http.Request) {
 	writer.Header().Set("Content-Type", "application/json")
+	writer.Header().Set("Access-Control-Allow-Origin", "*")
 	params := mux.Vars(router)
 	for index, user := range users {
 		if user.ID == params["id"] {
@@ -328,6 +346,7 @@ func deleteUser(writer http.ResponseWriter, router *http.Request) {
 
 func deleteAccount(writer http.ResponseWriter, router *http.Request) {
 	writer.Header().Set("Content-Type", "application/json")
+	writer.Header().Set("Access-Control-Allow-Origin", "*")
 	params := mux.Vars(router)
 	for index, account := range accounts {
 		if account.ID == params["id"] {
@@ -340,6 +359,7 @@ func deleteAccount(writer http.ResponseWriter, router *http.Request) {
 func deleteOrder(writer http.ResponseWriter, router *http.Request) {
 	orders := userOrderMap[currentUser.ID]
 	writer.Header().Set("Content-Type", "application/json")
+	writer.Header().Set("Access-Control-Allow-Origin", "*")
 	params := mux.Vars(router)
 	for index, order := range orders {
 		if order.ID == params["id"] {
@@ -381,7 +401,7 @@ func main() {
 
 	//Routes for Users
 	router.HandleFunc("/users", getUsers).Methods("GET")
-	router.HandleFunc("/users/{id}", getUser).Methods("GET")
+	router.HandleFunc("/users/{username}", getUser).Methods("GET")
 	router.HandleFunc("/users", createUser).Methods("POST")
 	router.HandleFunc("/users/{id}", updateUser).Methods("PUT")
 	router.HandleFunc("/users/{id}", deleteUser).Methods("DELETE")
