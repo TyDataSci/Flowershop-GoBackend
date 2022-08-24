@@ -4,6 +4,13 @@ import (
 	"github.com/gorilla/mux"
 )
 
+func ServeRoutes(router *mux.Router) {
+	flowerRoutes(router)
+	userRoutes(router)
+	accountRoutes(router)
+	orderRoutes(router)
+}
+
 func flowerRoutes(router *mux.Router) {
 	//Routes for Flowers
 	router.HandleFunc("/flowers", getFlowers).Methods("GET")
@@ -38,11 +45,4 @@ func orderRoutes(router *mux.Router) {
 	router.HandleFunc("/orders", createOrder).Methods("POST")
 	router.HandleFunc("/orders/{id}", updateOrder).Methods("PUT")
 	router.HandleFunc("/orders/{id}", deleteOrder).Methods("DELETE")
-}
-
-func ServeRoutes(router *mux.Router) {
-	flowerRoutes(router)
-	userRoutes(router)
-	accountRoutes(router)
-	orderRoutes(router)
 }
