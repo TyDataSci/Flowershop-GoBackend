@@ -26,14 +26,14 @@ func RemoveOrder(slice []*models.Order, index int) []*models.Order {
 	return append(modified, slice[index+1:]...)
 }
 
-func getOrders(writer http.ResponseWriter, router *http.Request) {
+func GetOrders(writer http.ResponseWriter, router *http.Request) {
 	orders := userOrderMap[currentUser.ID]
 	writer.Header().Set("Content-Type", "application/json")
 	writer.Header().Set("Access-Control-Allow-Origin", "*")
 	json.NewEncoder(writer).Encode(orders)
 }
 
-func getOrder(writer http.ResponseWriter, router *http.Request) {
+func GetOrder(writer http.ResponseWriter, router *http.Request) {
 	orders := userOrderMap[currentUser.ID]
 	writer.Header().Set("Content-Type", "application/json")
 	writer.Header().Set("Access-Control-Allow-Origin", "*")
@@ -46,7 +46,7 @@ func getOrder(writer http.ResponseWriter, router *http.Request) {
 	}
 }
 
-func createOrder(writer http.ResponseWriter, router *http.Request) {
+func CreateOrder(writer http.ResponseWriter, router *http.Request) {
 	orders := userOrderMap[currentUser.ID]
 	writer.Header().Set("Content-Type", "application/json")
 	writer.Header().Set("Access-Control-Allow-Origin", "*")
@@ -69,7 +69,7 @@ func createOrder(writer http.ResponseWriter, router *http.Request) {
 	json.NewEncoder(writer).Encode(orders)
 }
 
-func updateOrder(writer http.ResponseWriter, router *http.Request) {
+func UpdateOrder(writer http.ResponseWriter, router *http.Request) {
 	orders := userOrderMap[currentUser.ID]
 	writer.Header().Set("Content-Type", "application/json")
 	writer.Header().Set("Access-Control-Allow-Origin", "*")
@@ -97,7 +97,7 @@ func updateOrder(writer http.ResponseWriter, router *http.Request) {
 	}
 }
 
-func deleteOrder(writer http.ResponseWriter, router *http.Request) {
+func DeleteOrder(writer http.ResponseWriter, router *http.Request) {
 	orders := userOrderMap[currentUser.ID]
 	writer.Header().Set("Content-Type", "application/json")
 	writer.Header().Set("Access-Control-Allow-Origin", "*")

@@ -34,13 +34,13 @@ func RemoveAccount(slice []*models.Account, index int) []*models.Account {
 	return append(modified, slice[index+1:]...)
 }
 
-func getAccounts(writer http.ResponseWriter, router *http.Request) {
+func GetAccounts(writer http.ResponseWriter, router *http.Request) {
 	writer.Header().Set("Content-Type", "application/json")
 	writer.Header().Set("Access-Control-Allow-Origin", "*")
 	json.NewEncoder(writer).Encode(accounts)
 }
 
-func getAccount(writer http.ResponseWriter, router *http.Request) {
+func GetAccount(writer http.ResponseWriter, router *http.Request) {
 	writer.Header().Set("Content-Type", "application/json")
 	writer.Header().Set("Access-Control-Allow-Origin", "*")
 	params := mux.Vars(router)
@@ -61,7 +61,7 @@ func getAccount(writer http.ResponseWriter, router *http.Request) {
 
 }
 
-func createAccount(writer http.ResponseWriter, router *http.Request) {
+func CreateAccount(writer http.ResponseWriter, router *http.Request) {
 	writer.Header().Set("Content-Type", "application/json")
 	writer.Header().Set("Access-Control-Allow-Origin", "*")
 	var account *models.Account
@@ -78,7 +78,7 @@ func createAccount(writer http.ResponseWriter, router *http.Request) {
 	json.NewEncoder(writer).Encode(accounts)
 }
 
-func updateAccount(writer http.ResponseWriter, router *http.Request) {
+func UpdateAccount(writer http.ResponseWriter, router *http.Request) {
 	writer.Header().Set("Content-Type", "application/json")
 	writer.Header().Set("Access-Control-Allow-Origin", "*")
 	params := mux.Vars(router)
@@ -95,7 +95,7 @@ func updateAccount(writer http.ResponseWriter, router *http.Request) {
 	}
 }
 
-func deleteAccount(writer http.ResponseWriter, router *http.Request) {
+func DeleteAccount(writer http.ResponseWriter, router *http.Request) {
 	writer.Header().Set("Content-Type", "application/json")
 	writer.Header().Set("Access-Control-Allow-Origin", "*")
 	params := mux.Vars(router)

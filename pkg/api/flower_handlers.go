@@ -27,13 +27,13 @@ func RemoveItem(slice []*models.Item, index int) []*models.Item {
 	return append(modified, slice[index+1:]...)
 }
 
-func getFlowers(writer http.ResponseWriter, router *http.Request) {
+func GetFlowers(writer http.ResponseWriter, router *http.Request) {
 	writer.Header().Set("Content-Type", "application/json")
 	writer.Header().Set("Access-Control-Allow-Origin", "*")
 	json.NewEncoder(writer).Encode(flowers)
 }
 
-func getFlower(writer http.ResponseWriter, router *http.Request) {
+func GetFlower(writer http.ResponseWriter, router *http.Request) {
 	writer.Header().Set("Content-Type", "application/json")
 	writer.Header().Set("Access-Control-Allow-Origin", "*")
 	params := mux.Vars(router)
@@ -45,7 +45,7 @@ func getFlower(writer http.ResponseWriter, router *http.Request) {
 	}
 }
 
-func createFlower(writer http.ResponseWriter, router *http.Request) {
+func CreateFlower(writer http.ResponseWriter, router *http.Request) {
 	writer.Header().Set("Content-Type", "application/json")
 	writer.Header().Set("Access-Control-Allow-Origin", "*")
 	var flower *models.Item
@@ -55,7 +55,7 @@ func createFlower(writer http.ResponseWriter, router *http.Request) {
 	json.NewEncoder(writer).Encode(flowers)
 }
 
-func updateFlower(writer http.ResponseWriter, router *http.Request) {
+func UpdateFlower(writer http.ResponseWriter, router *http.Request) {
 	//set json content type
 	writer.Header().Set("Content-Type", "application/json")
 	writer.Header().Set("Access-Control-Allow-Origin", "*")
@@ -75,7 +75,7 @@ func updateFlower(writer http.ResponseWriter, router *http.Request) {
 	}
 }
 
-func deleteFlower(writer http.ResponseWriter, router *http.Request) {
+func DeleteFlower(writer http.ResponseWriter, router *http.Request) {
 	writer.Header().Set("Content-Type", "application/json")
 	writer.Header().Set("Access-Control-Allow-Origin", "*")
 	params := mux.Vars(router)

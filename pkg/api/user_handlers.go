@@ -33,13 +33,13 @@ func GetCurrentUser() *models.User {
 	return currentUser
 }
 
-func getUsers(writer http.ResponseWriter, router *http.Request) {
+func GetUsers(writer http.ResponseWriter, router *http.Request) {
 	writer.Header().Set("Content-Type", "application/json")
 	writer.Header().Set("Access-Control-Allow-Origin", "*")
 	json.NewEncoder(writer).Encode(users)
 }
 
-func getUser(writer http.ResponseWriter, router *http.Request) {
+func GetUser(writer http.ResponseWriter, router *http.Request) {
 	writer.Header().Set("Content-Type", "application/json")
 	writer.Header().Set("Access-Control-Allow-Origin", "*")
 	params := mux.Vars(router)
@@ -52,7 +52,7 @@ func getUser(writer http.ResponseWriter, router *http.Request) {
 	}
 }
 
-func createUser(writer http.ResponseWriter, router *http.Request) {
+func CreateUser(writer http.ResponseWriter, router *http.Request) {
 	writer.Header().Set("Content-Type", "application/json")
 	writer.Header().Set("Access-Control-Allow-Origin", "*")
 	var user *models.User
@@ -62,7 +62,7 @@ func createUser(writer http.ResponseWriter, router *http.Request) {
 	json.NewEncoder(writer).Encode(users)
 }
 
-func updateUser(writer http.ResponseWriter, router *http.Request) {
+func UpdateUser(writer http.ResponseWriter, router *http.Request) {
 	//Remove the previous user and append the modified user with changes
 	writer.Header().Set("Content-Type", "application/json")
 	writer.Header().Set("Access-Control-Allow-Origin", "*")
@@ -80,7 +80,7 @@ func updateUser(writer http.ResponseWriter, router *http.Request) {
 
 }
 
-func deleteUser(writer http.ResponseWriter, router *http.Request) {
+func DeleteUser(writer http.ResponseWriter, router *http.Request) {
 	writer.Header().Set("Content-Type", "application/json")
 	writer.Header().Set("Access-Control-Allow-Origin", "*")
 	params := mux.Vars(router)
