@@ -12,8 +12,20 @@ import (
 var accounts = []*models.Account{}
 var accountMap = make(map[string]*models.Account)
 
-func GetAccounts() []*models.Account {
+func GetAccountsArray() []*models.Account {
 	return accounts
+}
+
+func SetAccountsArray(_accounts []*models.Account) {
+	accounts = _accounts
+}
+
+func GetAccountMap() map[string]*models.Account {
+	return accountMap
+}
+
+func SetAccountMap(_accountMap map[string]*models.Account) {
+	accountMap = _accountMap
 }
 
 func RemoveAccount(slice []*models.Account, index int) []*models.Account {

@@ -12,10 +12,15 @@ import (
 )
 
 var users = []*models.User{}
+
 var currentUser = &models.User{ID: "0", Username: "Admin", Password: "Password"}
 
-func GetUsers() []*models.User {
+func GetUsersArray() []*models.User {
 	return users
+}
+
+func SetUsersArray(_users []*models.User) {
+	users = _users
 }
 
 func RemoveUser(slice []*models.User, index int) []*models.User {

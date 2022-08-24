@@ -13,8 +13,12 @@ import (
 
 var flowers = []*models.Item{}
 
-func GetFlowers() []*models.Item {
+func GetFlowersArray() []*models.Item {
 	return flowers
+}
+
+func SetFlowersArray(_flowers []*models.Item) {
+	flowers = _flowers
 }
 
 func RemoveItem(slice []*models.Item, index int) []*models.Item {

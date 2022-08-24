@@ -10,6 +10,16 @@ import (
 	"github.com/gorilla/mux"
 )
 
+var userOrderMap = make(map[string][]*models.Order)
+
+func GetUserOrderMap() map[string][]*models.Order {
+	return userOrderMap
+}
+
+func SetUserOrderMap(_userOrderMap map[string][]*models.Order) {
+	userOrderMap = _userOrderMap
+}
+
 func RemoveOrder(slice []*models.Order, index int) []*models.Order {
 	modified := make([]*models.Order, 0)
 	modified = append(modified, slice[:index]...)
@@ -40,7 +50,7 @@ func createOrder(writer http.ResponseWriter, router *http.Request) {
 	orders := userOrderMap[currentUser.ID]
 	writer.Header().Set("Content-Type", "application/json")
 	writer.Header().Set("Access-Control-Allow-Origin", "*")
-	var order *model.Order
+	var order *models.Order
 	_ = json.NewDecoder(router.Body).Decode(&order)
 	order.ID = strconv.Itoa(rand.Intn(100000))
 	order.UserID = currentUser.ID
