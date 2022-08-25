@@ -4,6 +4,13 @@ import (
 	"github.com/gorilla/mux"
 )
 
+func Router() *mux.Router {
+	router := mux.NewRouter()
+	//initialize mux router
+	ServeRoutes(router)
+	return router
+}
+
 func ServeRoutes(router *mux.Router) {
 	flowerRoutes(router)
 	userRoutes(router)
