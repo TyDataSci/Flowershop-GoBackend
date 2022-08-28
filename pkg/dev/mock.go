@@ -11,8 +11,15 @@ func InitializeMockData() {
 	//Mock data for Flowers
 	var flowers []*models.Item
 	flowers = api.GetFlowersArray()
-	flowers = append(flowers, &models.Item{ID: "1", ItemType: "Flower", Description: "Red Rose", Price: 10.00, Inventory: &models.Inventory{Count: 0, MinimumCount: 0, Supplier: "Reynolds", LeadDays: 1, Cost: 4.50}})
-	flowers = append(flowers, &models.Item{ID: "2", ItemType: "Flower", Description: "White Rose", Price: 10.00, Inventory: &models.Inventory{Count: 0, MinimumCount: 0, Supplier: "Reynolds", LeadDays: 1, Cost: 4.50}})
+	flowers = append(flowers, &models.Item{ID: "FL1RA", Type: "rose", Description: "Rose Arrangement", Price: "30.00", Image: "assets/flowers/rosearrangement.jpg", Inventory: &models.Inventory{Count: 0, MinimumCount: 0, Supplier: "Reynolds", LeadDays: 1, Cost: 4.50}})
+	flowers = append(flowers, &models.Item{ID: "FL2RA", Type: "rose", Description: "Rose Arrangement", Price: "30.00", Image: "assets/flowers/rosearrangement.jpg", Inventory: &models.Inventory{Count: 0, MinimumCount: 0, Supplier: "Reynolds", LeadDays: 1, Cost: 4.50}})
+	flowers = append(flowers, &models.Item{ID: "FL1DA", Type: "daisy", Description: "Daisy Arrangement", Price: "30.00", Image: "assets/flowers/daisyarrangement.jpg", Inventory: &models.Inventory{Count: 0, MinimumCount: 0, Supplier: "Reynolds", LeadDays: 1, Cost: 4.50}})
+	flowers = append(flowers, &models.Item{ID: "FL2DA", Type: "daisy", Description: "Daisy Arrangement", Price: "30.00", Image: "assets/flowers/daisyarrangement.jpg", Inventory: &models.Inventory{Count: 0, MinimumCount: 0, Supplier: "Reynolds", LeadDays: 1, Cost: 4.50}})
+	flowers = append(flowers, &models.Item{ID: "FL1LA", Type: "lily", Description: "Lily Arrangement", Price: "30.00", Image: "assets/flowers/lilyarrangement.jpg", Inventory: &models.Inventory{Count: 0, MinimumCount: 0, Supplier: "Reynolds", LeadDays: 1, Cost: 4.50}})
+	flowers = append(flowers, &models.Item{ID: "FL2LA", Type: "lily", Description: "Lily Arrangement", Price: "30.00", Image: "assets/flowers/lilyarrangement.jpg", Inventory: &models.Inventory{Count: 0, MinimumCount: 0, Supplier: "Reynolds", LeadDays: 1, Cost: 4.50}})
+	flowers = append(flowers, &models.Item{ID: "FL1CA", Type: "carnation", Description: "Carnation Arrangement", Price: "30.00", Image: "assets/flowers/carnationarrangement.jpg", Inventory: &models.Inventory{Count: 0, MinimumCount: 0, Supplier: "Reynolds", LeadDays: 1, Cost: 4.50}})
+	flowers = append(flowers, &models.Item{ID: "FL2CA", Type: "carnation", Description: "Carnation Arrangement", Price: "30.00", Image: "assets/flowers/carnationarrangement.jpg", Inventory: &models.Inventory{Count: 0, MinimumCount: 0, Supplier: "Reynolds", LeadDays: 1, Cost: 4.50}})
+
 	api.SetFlowersArray(flowers)
 
 	//Mock data for Users

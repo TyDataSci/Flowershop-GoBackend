@@ -2,8 +2,9 @@ package models
 
 type Item struct {
 	ID          string     `json:"id"`
-	ItemType    string     `json:"itemtype"`
+	Type        string     `json:"type"`
 	Description string     `json:"description"`
-	Price       float64    `json:"price"`
+	Price       string     `json:"price"`
+	Image       string     `json:"image"`
 	Inventory   *Inventory `json:"inventory"`
 }
