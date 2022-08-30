@@ -45,7 +45,7 @@ func InitializeMockData() {
 	var ord = make([]*models.Order, 0)
 	var items = make([]*models.Item, 0)
 	items = append(items, &models.Item{ID: "FL1RA", Type: "rose", Description: "Rose Arrangement", Price: "30.00", Image: "assets/flowers/rosearrangement.jpg", Inventory: &models.Inventory{Count: 0, MinimumCount: 0, Supplier: "Reynolds", LeadDays: 1, Cost: 4.50}})
-	ord = append(ord, &models.Order{ID: "1", Date: "07-04-2022", UserID: "1", Items: items, DeliveryType: "Deliver", Note: "", Instructions: "", TotalCost: 10.00})
+	ord = append(ord, &models.Order{ID: "1", Date: "07-04-2022", UserID: "1", Items: items, DeliveryType: "Deliver", Note: "", Instructions: "", TotalCost: "10.00"})
 	var userOrderMap = api.GetUserOrderMap()
 	userOrderMap["0"] = ord
 	api.SetUserOrderMap(userOrderMap)

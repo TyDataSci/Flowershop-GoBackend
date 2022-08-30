@@ -8,5 +8,5 @@ type Order struct {
 	DeliveryType string  `json:"deliverytype"`
 	Note         string  `json:"note"`
 	Instructions string  `json:"instructions"`
-	TotalCost    float64 `json:"totalcost"`
+	TotalCost    string  `json:"totalcost"`
 }
