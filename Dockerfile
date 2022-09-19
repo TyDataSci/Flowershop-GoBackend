@@ -1,12 +1,16 @@
-FROM golang:1.17-alpine
+#Build Stage 
+FROM golang:1.17-alpine as builder
 RUN mkdir /build
 WORKDIR /build
+COPY . .
 
-RUN export GO111MODULE=on
-RUN go get github.com/TyDataSci/Flowershop-GoBackend/cmd
-RUN cd /build && git clone https://github.com/TyDataSci/Flowershop-GoBackend.git
-RUN cd /build/Flowershop-GoBackend/cmd && go build
+RUN go build -o main cmd/main.go
 
+
+#Run Stage 
+FROM alpine
+WORKDIR /build
+COPY --from=builder /build/main .
 EXPOSE 8000
 
-ENTRYPOINT [ "/bulid/Flowershop-GoBackend/cmd/main" ]
+ENTRYPOINT [ "/build/main" ]
