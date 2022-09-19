@@ -3,12 +3,10 @@ package main
 import (
 	"Flowershop-GoBackend/pkg/api"
 	"Flowershop-GoBackend/pkg/db"
-	"Flowershop-GoBackend/pkg/middleware"
 	"fmt"
 	"log"
 	"net/http"
 
-	"github.com/gin-gonic/gin"
 	_ "github.com/jackc/pgx/v4/stdlib"
 )
 
@@ -37,15 +35,20 @@ func main() {
 	//	}
 	//initialize router to handle api calls
 	//dev.InitializeMockData()
-	fmt.Printf("Starting server at port 8000\n")
-	log.Fatal(http.ListenAndServe(":8000", api.Router()))
+	//fmt.Printf("Session Key:%v\n", os.Getenv("SESSIONKEY"))
 
 	// Stores session using secure cookies
 	//*CookieStore  --> Struct with codecs to store cookies and options
-
-	var c *gin.Context
-	session, _ := middleware.SessionStore().Get(c.Request, "session")
-	session.Values["UserID"] = "admin"
-	session.Save(c.Request, c.Writer)
+	//var c *gin.Context
+	//middleware.Init()
+	//session, err := middleware.SessionStore().Get(c.Request, "session")
+	//if err != nil {
+	//	println(err)
+	//}
+	//println("got session")
+	//session.Values["UserID"] = "admin"
+	//session.Save(c.Request, c.Writer)
+	fmt.Printf("Starting server at port 8000\n")
+	log.Fatal(http.ListenAndServe(":8000", api.Router()))
 
 }

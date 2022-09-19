@@ -40,6 +40,7 @@ require (
 require (
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/gin-gonic/gin v1.8.1
+	github.com/google/uuid v1.3.0
 	github.com/gorilla/context v1.1.1
 	github.com/gorilla/sessions v1.2.1
 	github.com/pmezard/go-difflib v1.0.0 // indirect

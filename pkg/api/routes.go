@@ -29,11 +29,11 @@ func itemRoutes(router *mux.Router) {
 
 func userRoutes(router *mux.Router) {
 	//Routes for Users
-	router.HandleFunc("/users", GetUsers).Methods("GET")
 	router.HandleFunc("/users/{username}", GetUser).Methods("GET")
 	router.HandleFunc("/users", CreateUser).Methods("POST")
-	//router.HandleFunc("/users/{id}", UpdateUser).Methods("PUT")
-	//router.HandleFunc("/users/{id}", DeleteUser).Methods("DELETE")
+	//Routes for User Session data
+	router.HandleFunc("/user", GetUserSession).Methods("GET")
+	router.HandleFunc("/user", ValidateUser).Methods("POST")
 }
 
 func orderRoutes(router *mux.Router) {
@@ -47,9 +47,8 @@ func orderRoutes(router *mux.Router) {
 
 func orderItemsRoutes(router *mux.Router) {
 	//Routes for Order_Items
-	router.HandleFunc("/order_items/{orderid}", GetOrderItems).Methods("GET")
-	router.HandleFunc("/order_items", CreateItem).Methods("POST")
-	router.HandleFunc("/order_items", UpdateItem).Methods("PUT")
+	router.HandleFunc("/order_items/order={orderid}", GetOrderItems).Methods("GET")
+	router.HandleFunc("/order_items/order={orderid}&item={itemid}", CreateItem).Methods("POST")
+	router.HandleFunc("/order_items/order={orderid}&item={itemid}&action=remove", RemoveOrderItem).Methods("PUT")
 	//router.HandleFunc("/items/{id}", GetItem).Methods("GET")
-	//router.HandleFunc("/items/{id}", DeleteItem).Methods("DELETE")
 }

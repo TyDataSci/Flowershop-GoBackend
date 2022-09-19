@@ -2,7 +2,6 @@ package api
 
 import (
 	"Flowershop-GoBackend/pkg/db"
-	"Flowershop-GoBackend/pkg/models"
 	"encoding/json"
 	"net/http"
 
@@ -23,20 +22,23 @@ func GetOrderItems(writer http.ResponseWriter, router *http.Request) {
 func CreateOrderItem(writer http.ResponseWriter, router *http.Request) {
 	writer.Header().Set("Content-Type", "application/json")
 	writer.Header().Set("Access-Control-Allow-Origin", "*")
-	var order_item models.Order_Item
-	json.NewDecoder(router.Body).Decode(&order_item)
-	db.CreateOrderItem(order_item.OrderID, order_item.ItemID)
-	order_items, _ := db.GetOrderItems(order_item.OrderID)
+	params := mux.Vars(router)
+	paramsOrderID, _ := strconv.Atoi(params["orderid"])
+	paramsItemID, _ := strconv.Atoi(params["itemid"])
+	db.CreateOrderItem(paramsOrderID, paramsItemID)
+	order_items, _ := db.GetOrderItems(paramsOrderID)
 	json.NewEncoder(writer).Encode(order_items)
 }
 
-func UpdateOrderItem(writer http.ResponseWriter, router *http.Request) {
+func RemoveOrderItem(writer http.ResponseWriter, router *http.Request) {
 	writer.Header().Set("Content-Type", "application/json")
 	writer.Header().Set("Access-Control-Allow-Origin", "*")
-	var modifyOrderItem models.Order_Item
-	json.NewDecoder(router.Body).Decode(&modifyOrderItem)
-	db.UpdateOrderItem(modifyOrderItem)
-	order_items, _ := db.GetOrderItems(modifyOrderItem.OrderID)
+	params := mux.Vars(router)
+	paramsOrderID, _ := strconv.Atoi(params["orderid"])
+	paramsItemID, _ := strconv.Atoi(params["itemid"])
+	paramRemoved := true
+	db.UpdateOrderItem(paramsOrderID, paramsItemID, paramRemoved)
+	order_items, _ := db.GetOrderItems(paramsOrderID)
 	json.NewEncoder(writer).Encode(order_items)
 
 }

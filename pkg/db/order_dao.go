@@ -29,6 +29,29 @@ func GetOrder(paramUserID int) (models.Order, error) {
 	return order, nil
 }
 
+func GetIncompletOrder(paramUserID int) (models.Order, error) {
+	var order models.Order
+
+	if err := db().PingContext(context.Background()); err != nil {
+		fmt.Println("db.PingContext", err)
+		return order, err
+	}
+	row := db().QueryRowContext(context.Background(), "SELECT * FROM orders WHERE userid = $1 AND completed = false",
+		paramUserID)
+	if err := row.Err(); err != nil {
+		fmt.Println("db.QueryRowContext", err)
+		return order, err
+	}
+
+	if err := row.Scan(&order.ID, &order.Date, &order.UserID, &order.Delivery, &order.Completed); err != nil {
+		fmt.Println("row.Scan", err)
+		return order, err
+	}
+
+	fmt.Printf("orderid: %v, date: %v, userid: %v, delivery: %v, completed: %v\n", order.ID, order.Date, order.UserID, order.Delivery, order.Completed)
+	return order, nil
+}
+
 func CreateOrder(paramUserID int) (models.Order, error) {
 	var order models.Order
 	err := db().QueryRowContext(context.Background(),

@@ -59,13 +59,13 @@ func CreateOrderItem(paramOrderID int, paramItemID int) (models.Order_Item, erro
 	return order_item, nil
 }
 
-func UpdateOrderItem(paramOrderItem models.Order_Item) error {
+func UpdateOrderItem(paramOrderID int, paramItemID int, paramRemoved bool) error {
 	_, err := db().ExecContext(context.Background(), "UPDATE order_items SET removed = $1, WHERE orderid = $2 AND itemid = $3",
-		paramOrderItem.Removed, paramOrderItem.OrderID, paramOrderItem.ItemID)
+		paramRemoved, paramOrderID, paramItemID)
 	if err != nil {
 		fmt.Println("db.ExecContext", err)
 		return err
 	}
-	println(paramOrderItem.OrderID, "Successfully updated")
+	println(paramOrderID, "Successfully updated")
 	return nil
 }
