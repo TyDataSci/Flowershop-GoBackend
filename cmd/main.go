@@ -48,6 +48,7 @@ func main() {
 	//println("got session")
 	//session.Values["UserID"] = "admin"
 	//session.Save(c.Request, c.Writer)
+
 	fmt.Printf("Starting server at port 8000\n")
 	log.Fatal(http.ListenAndServe(":8000", api.Router()))
 
