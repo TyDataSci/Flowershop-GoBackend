@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"fmt"
 	"net/url"
+	"os"
 
 	_ "github.com/jackc/pgx/v4/stdlib"
 )
@@ -11,10 +12,11 @@ import (
 var db_static *sql.DB
 
 func Connect() {
+	dbpass := os.Getenv("DB_PASS")
 	dsn := url.URL{
 		Scheme: "postgres",
 		Host:   "foreveryours-db.cie6oavuia6e.us-east-2.rds.amazonaws.com:5432",
-		User:   url.UserPassword("root", "Password"),
+		User:   url.UserPassword("root", dbpass),
 		Path:   "initial_db",
 	}
 	q := dsn.Query()

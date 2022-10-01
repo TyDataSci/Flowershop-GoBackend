@@ -31,5 +31,5 @@ jobs:
         REPOSITORY: flowershop-gobackend
         IMAGE_TAG: ${{ github.sha }}
       run: |
-        docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG .
+        docker build --build-arg ARG_PASS=${{ secrets.DB_PASS }} -t $REGISTRY/$REPOSITORY:$IMAGE_TAG .
         docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
