@@ -41,7 +41,7 @@ func ValidateUser(writer http.ResponseWriter, request *http.Request) {
 	writer.Header().Set("Content-Type", "application/json")
 	writer.Header().Set("Access-Control-Allow-Origin", "http://foreveryoursflowershop.com")
 	writer.Header().Set("Access-Control-Allow-Credentials", "true")
-	writer.Header().Set("Access-Control-Allow-Methods", "GET, POST, DELETE, OPTIONS")
+	writer.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
 	writer.Header().Set("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Cookie")
 
 	var validateUser models.User
