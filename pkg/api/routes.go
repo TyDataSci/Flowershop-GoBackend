@@ -33,8 +33,8 @@ func userRoutes(router *mux.Router) {
 	router.HandleFunc("/users/{username}", GetUser).Methods("GET")
 	router.HandleFunc("/users", CreateUser).Methods("POST")
 	//Routes for User Session data
-	router.HandleFunc("/user", GetUserSession).Methods("GET", "OPTIONS")
-	router.HandleFunc("/user", ValidateUser).Methods("POST")
+	router.HandleFunc("/user", GetUserSession).Methods("GET")
+	router.HandleFunc("/user", ValidateUser).Methods("POST", "OPTIONS")
 }
 
 func orderRoutes(router *mux.Router) {
