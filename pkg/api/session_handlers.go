@@ -15,6 +15,7 @@ func GetUserSession(writer http.ResponseWriter, request *http.Request) {
 	writer.Header().Set("Content-Type", "application/json")
 	writer.Header().Set("Access-Control-Allow-Origin", "http://foreveryoursflowershop.com")
 	writer.Header().Set("Access-Control-Allow-Credentials", "true")
+	writer.Header().Set("Access-Control-Allow-Methods", "GET, POST, DELETE, OPTIONS")
 	c, err := request.Cookie("session-token")
 	if err == nil {
 		sessionToken := c.Value

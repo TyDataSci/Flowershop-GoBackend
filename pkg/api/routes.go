@@ -8,6 +8,7 @@ func Router() *mux.Router {
 	router := mux.NewRouter()
 	//initialize mux router
 	ServeRoutes(router)
+	router.Methods("GET", "POST", "PUT", "OPTIONS")
 	return router
 }
 
@@ -29,7 +30,7 @@ func itemRoutes(router *mux.Router) {
 
 func userRoutes(router *mux.Router) {
 	//Routes for Users
-	router.HandleFunc("/users/{username}", GetUser).Methods("GET")
+	router.HandleFunc("/users/{username}", GetUser).Methods("GET", "OPTIONS")
 	router.HandleFunc("/users", CreateUser).Methods("POST")
 	//Routes for User Session data
 	router.HandleFunc("/user", GetUserSession).Methods("GET")
