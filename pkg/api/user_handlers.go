@@ -39,7 +39,8 @@ func CreateUser(writer http.ResponseWriter, router *http.Request) {
 
 func ValidateUser(writer http.ResponseWriter, request *http.Request) {
 	writer.Header().Set("Content-Type", "application/json")
-	writer.Header().Set("Access-Control-Allow-Origin", "*")
+	writer.Header().Set("Access-Control-Allow-Origin", "http://foreveryoursflowershop.com")
+	writer.Header().Set("Access-Control-Allow-Credentials", "true")
 
 	var validateUser models.User
 	json.NewDecoder(request.Body).Decode(&validateUser)
