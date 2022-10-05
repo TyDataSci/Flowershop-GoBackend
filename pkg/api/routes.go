@@ -49,7 +49,7 @@ func orderRoutes(router *mux.Router) {
 func orderItemsRoutes(router *mux.Router) {
 	//Routes for Order_Items
 	router.HandleFunc("/order_items/order={orderid}", GetOrderItems).Methods("GET")
-	router.HandleFunc("/order_items/order={orderid}&item={itemid}", CreateItem).Methods("POST")
-	router.HandleFunc("/order_items/order={orderid}&item={itemid}&action=remove", RemoveOrderItem).Methods("PUT")
+	router.HandleFunc("/order_items/order={orderid}&item={itemid}", CreateItem).Methods("POST", "OPTIONS")
+	router.HandleFunc("/order_items/order={orderid}&item={itemid}&action=remove", RemoveOrderItem).Methods("PUT", "OPTIONS")
 	//router.HandleFunc("/items/{id}", GetItem).Methods("GET")
 }
