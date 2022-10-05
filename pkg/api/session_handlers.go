@@ -33,7 +33,7 @@ func GetUserSession(writer http.ResponseWriter, request *http.Request) {
 			fmt.Println("db.CreateSession", err)
 			return
 		}
-		cookieSession := &http.Cookie{Name: "session-token", Value: userSession.Token, Expires: userSession.Expiry, Path: "/", Domain: "foreveryoursflowershop.com"}
+		cookieSession := &http.Cookie{Name: "session-token", Value: userSession.Token, Expires: userSession.Expiry, Path: "/", Domain: "foreveryoursflowershop.com", SameSite: http.SameSiteStrictMode}
 		http.SetCookie(writer, cookieSession)
 		println("Created Token finished")
 		json.NewEncoder(writer).Encode(userSession)
