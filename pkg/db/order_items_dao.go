@@ -60,7 +60,7 @@ func CreateOrderItem(paramOrderID int, paramItemID int) (models.Order_Item, erro
 }
 
 func UpdateOrderItem(paramOrderID int, paramItemID int, paramRemoved bool) error {
-	_, err := db().ExecContext(context.Background(), "UPDATE order_items SET removed = $1, WHERE orderid = $2 AND itemid = $3",
+	_, err := db().ExecContext(context.Background(), "UPDATE order_items SET removed = $1 WHERE orderid = $2 AND itemid = $3",
 		paramRemoved, paramOrderID, paramItemID)
 	if err != nil {
 		fmt.Println("db.ExecContext", err)
