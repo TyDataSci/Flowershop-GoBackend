@@ -2,11 +2,9 @@ package api
 
 import (
 	"Flowershop-GoBackend/pkg/db"
-	"fmt"
 	"log"
 	"net/http"
 	"strconv"
-	"time"
 
 	"github.com/gorilla/mux"
 )
@@ -23,30 +21,15 @@ func CompleteOrder(writer http.ResponseWriter, request *http.Request) {
 	writer.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
 	writer.Header().Set("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Cookie")
 	params := mux.Vars(request)
-	paramsOrderID, _ := strconv.Atoi(params["id"])
-	order, _ := db.GetOrder(paramsOrderID)
+	paramsUserID, _ := strconv.Atoi(params["id"])
+	order, _ := db.GetIncompletOrder(paramsUserID)
 	order.Completed = true
-	db.UpdateOrder(order)
-	c, err := request.Cookie("session-token")
+	err := db.UpdateOrder(order)
 	if err == nil {
-		sessionToken := c.Value
-		userSession, _ := db.GetUserSession(sessionToken)
-		cartOrder, err := db.GetIncompletOrder(userSession.UserID)
-		if err != nil {
-			cartOrder, err = db.CreateOrder(userSession.UserID)
-			fmt.Println("Created order for cart")
-			if err != nil {
-				fmt.Println("db.CreateOrder", err)
-				return
-			}
-		}
-
-		expiresAt := time.Now().Add(120 * time.Minute)
-		userSession.OrderID = cartOrder.ID
-		userSession.Expiry = expiresAt
-		fmt.Println("Session", userSession.UserID, cartOrder.ID)
-		db.UpdateSessionIDs(userSession)
-
+		session, _ := db.GetUserLastSession(paramsUserID)
+		order, _ := db.CreateOrder(paramsUserID)
+		session.OrderID = order.ID
+		db.UpdateSessionIDs(session)
 	} else {
 		log.Printf("Unable to find session-token for order completed request")
 		writer.WriteHeader(401)
