@@ -39,7 +39,7 @@ func userRoutes(router *mux.Router) {
 func orderRoutes(router *mux.Router) {
 	//Routes for Orders
 	router.HandleFunc("/orders", GetOrders).Methods("GET")
-	router.HandleFunc("/orders/{id}", GetOrder).Methods("GET")
+	router.HandleFunc("/orders/{id}/completed", CompleteOrder).Methods("PUT", "OPTIONS")
 
 }
 
