@@ -13,7 +13,7 @@ import (
 
 func GetUserSession(writer http.ResponseWriter, request *http.Request) {
 	writer.Header().Set("Content-Type", "application/json")
-	writer.Header().Set("Access-Control-Allow-Origin", "http://foreveryoursflowershop.com")
+	writer.Header().Set("Access-Control-Allow-Origin", "https://foreveryoursflowershop.com")
 	//writer.Header().Set("Access-Control-Allow-Origin", "http://127.0.0.1:8080")
 	writer.Header().Set("Access-Control-Allow-Credentials", "true")
 	writer.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
