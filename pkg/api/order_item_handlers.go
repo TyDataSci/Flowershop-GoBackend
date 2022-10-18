@@ -2,6 +2,7 @@ package api
 
 import (
 	"Flowershop-GoBackend/pkg/db"
+	"Flowershop-GoBackend/pkg/models"
 	"encoding/json"
 	"net/http"
 
@@ -35,6 +36,9 @@ func CreateOrderItem(writer http.ResponseWriter, router *http.Request) {
 	paramsItemID, _ := strconv.Atoi(params["itemid"])
 	db.CreateOrderItem(paramsOrderID, paramsItemID)
 	order_items, _ := db.GetOrderItems(paramsOrderID)
+	if order_items == nil {
+		order_items = make([]models.Item, 0)
+	}
 	json.NewEncoder(writer).Encode(order_items)
 }
 
