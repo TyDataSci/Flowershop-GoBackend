@@ -17,8 +17,7 @@ func GetOrderItems(paramOrderID int) ([]models.Item, error) {
 			  FROM items as i
 			  JOIN types as t ON t.id = i.typeid
 			  JOIN order_items oi ON i.id = oi.itemid
-			  WHERE oi.orderid = $1
-			  AND oi.removed = false`
+			  WHERE oi.orderid = $1`
 	rows, err := db().QueryContext(context.Background(), query, paramOrderID)
 	if err != nil {
 		fmt.Println("db.QueryContext", err)
