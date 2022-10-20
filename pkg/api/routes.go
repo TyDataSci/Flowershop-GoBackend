@@ -22,6 +22,7 @@ func ServeRoutes(router *mux.Router) {
 func itemRoutes(router *mux.Router) {
 	//Routes for Items
 	router.HandleFunc("/items", GetItems).Methods("GET")
+	router.HandleFunc("/items/{id}", GetItem).Methods("GET")
 	router.HandleFunc("/items", CreateItem).Methods("POST")
 	router.HandleFunc("/items", UpdateItem).Methods("PUT")
 

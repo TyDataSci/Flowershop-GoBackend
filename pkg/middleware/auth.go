@@ -7,6 +7,6 @@ import (
 )
 
 func HashwordCompare(hashword string, user models.User) error {
-	err := bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(hashword))
+	err := bcrypt.CompareHashAndPassword([]byte(hashword), []byte(user.Password))
 	return err
 }

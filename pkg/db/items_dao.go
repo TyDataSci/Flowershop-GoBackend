@@ -6,6 +6,34 @@ import (
 	"fmt"
 )
 
+func GetItem(paramItemID int) (models.Item, error) {
+	var item models.Item
+	query := `SELECT i.id,t.name,i.description,i.price,i.image 
+			 FROM items as i 
+			 JOIN types as t ON t.id = i.typeid
+			 WHERE i.id = $1`
+
+	if err := db().PingContext(context.Background()); err != nil {
+		fmt.Println("db.PingContext", err)
+		return item, err
+	}
+	row := db().QueryRowContext(context.Background(), query,
+		paramItemID)
+	if err := row.Err(); err != nil {
+		fmt.Println("db.QueryRowContext", err)
+		return item, err
+	}
+
+	if err := row.Scan(&item.ID, &item.Type, &item.Description, &item.Price, &item.Image); err != nil {
+		fmt.Println("row.Scan", err)
+		return item, err
+	}
+
+	fmt.Printf("Successfully returned item %v\n", item.ID)
+	return item, nil
+
+}
+
 func GetItems() ([]models.Item, error) {
 	var items []models.Item
 

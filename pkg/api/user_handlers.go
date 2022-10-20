@@ -2,6 +2,7 @@ package api
 
 import (
 	"Flowershop-GoBackend/pkg/db"
+	"Flowershop-GoBackend/pkg/middleware"
 	"Flowershop-GoBackend/pkg/models"
 	"encoding/json"
 	"fmt"
@@ -10,6 +11,7 @@ import (
 	"time"
 
 	"github.com/gorilla/mux"
+	"golang.org/x/crypto/bcrypt"
 )
 
 func GetUser(writer http.ResponseWriter, router *http.Request) {
@@ -28,9 +30,15 @@ func GetUser(writer http.ResponseWriter, router *http.Request) {
 
 func CreateUser(writer http.ResponseWriter, router *http.Request) {
 	writer.Header().Set("Content-Type", "application/json")
-	writer.Header().Set("Access-Control-Allow-Origin", "*")
+	writer.Header().Set("Access-Control-Allow-Origin", "https://foreveryoursflowershop.com")
+	//writer.Header().Set("Access-Control-Allow-Origin", "http://127.0.0.1:8080")
+	writer.Header().Set("Access-Control-Allow-Credentials", "true")
+	writer.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
+	writer.Header().Set("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Cookie")
 	var newUser models.User
 	json.NewDecoder(router.Body).Decode(&newUser)
+	bytes, _ := bcrypt.GenerateFromPassword([]byte(newUser.Password), 14)
+	newUser.Password = string(bytes)
 	newUser, err := db.CreateUser(newUser.Username, newUser.Name, newUser.Password)
 	if err == nil {
 		json.NewEncoder(writer).Encode(newUser)
@@ -49,7 +57,8 @@ func ValidateUser(writer http.ResponseWriter, request *http.Request) {
 	json.NewDecoder(request.Body).Decode(&validateUser)
 	user, err := db.GetUser(validateUser.Username)
 	if err == nil {
-		if validateUser.Password == user.Password {
+		err := middleware.HashwordCompare(user.Password, validateUser)
+		if err == nil {
 			json.NewEncoder(writer).Encode(user)
 			cartOrder, err := db.GetIncompletOrder(user.ID)
 			if err != nil {

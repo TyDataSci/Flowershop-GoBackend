@@ -3,52 +3,28 @@ package main
 import (
 	"Flowershop-GoBackend/pkg/api"
 	"Flowershop-GoBackend/pkg/db"
+	"Flowershop-GoBackend/pkg/middleware"
+	"Flowershop-GoBackend/pkg/models"
 	"fmt"
 	"log"
 	"net/http"
 
 	_ "github.com/jackc/pgx/v4/stdlib"
+	"golang.org/x/crypto/bcrypt"
 )
 
 func main() {
 	db.Connect()
-	//dev.InitializeMockData()
-	//db.CreateUser("Admin", "Admin", "Password")
-	//user, err := db.CreateUser("Admin", "Admin", "Password")
-	//if err == nil {
-	//		order, err := db.CreateOrder(user.ID)
-	//		if err == nil {
-	//			db.CreateOrderItem(order.ID, 1)
-	//			db.CreateOrderItem(order.ID, 2)
-	//			db.CreateOrderItem(order.ID, 3)
-	//			items, _ := db.GetItems()
-	//			for _, item := range items {
-	//				println(item.Description)
-	//			}
-	//	db.GetOrder(order.UserID)
-	//	order.Delivery = true
-	//	order.Completed = true
-	//	db.UpdateOrder(order)
-
-	//		}
-
-	//	}
-	//initialize router to handle api calls
-	//dev.InitializeMockData()
-	//fmt.Printf("Session Key:%v\n", os.Getenv("SESSIONKEY"))
-
-	// Stores session using secure cookies
-	//*CookieStore  --> Struct with codecs to store cookies and options
-	//var c *gin.Context
-	//middleware.Init()
-	//session, err := middleware.SessionStore().Get(c.Request, "session")
-	//if err != nil {
-	//	println(err)
-	//}
-	//println("got session")
-	//session.Values["UserID"] = "admin"
-	//session.Save(c.Request, c.Writer)
-
+	var user models.User
+	user.Password = "Password"
+	bytes, _ := bcrypt.GenerateFromPassword([]byte("Password"), 14)
+	err := middleware.HashwordCompare(string(bytes), user)
+	if err == nil {
+		fmt.Println("Success compare")
+	} else {
+		fmt.Printf("Fail compare %v", err)
+	}
+	fmt.Println(string(bytes))
 	fmt.Printf("starting server at port 8000\n")
 	log.Fatal(http.ListenAndServe(":8000", api.Router()))
 
